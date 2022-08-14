@@ -15,6 +15,7 @@ namespace Domain.Repositories
         void Insert(IEnumerable<TEntity> entities);
         void Update(TEntity entity);
         void Update(IEnumerable<TEntity> entities);
+        void Update(int id);
         void Delete(TEntity entity);
         void Delete(int id);
         void Delete(IEnumerable<TEntity> entities);

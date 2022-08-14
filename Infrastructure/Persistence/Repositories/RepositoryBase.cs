@@ -66,5 +66,9 @@ namespace Persistence.Repositories
         {
             _context.Set<TEntity>().UpdateRange(entities);
         }
+        public void Update(int id)
+        {
+            _context.Set<TEntity>().Update(FindById(id));
+        }
     }
 }

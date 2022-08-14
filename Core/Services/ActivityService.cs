@@ -48,10 +48,10 @@ namespace Services
            
         }
 
-        public void Update(ActivityDto entity)
+        public void Update(int id)
         {
-            var activity = entity.Adapt<Activity>();
-            _repositoryManager.repositoryActivity.Update(activity);
+          
+            _repositoryManager.repositoryActivity.Update(id);
             _repositoryManager.UnitOfWork.SaveChanges();
         }
     }

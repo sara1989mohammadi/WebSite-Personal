@@ -12,7 +12,7 @@ namespace Services.Abstractions
         IEnumerable<ActivityDto> GetAll();
         ActivityDto GetById(int id);       
         void Insert(ActivityDto entity);        
-        void Update(ActivityDto entity);              
+        void Update(int id);              
         void Delete(int id);
         
     }
