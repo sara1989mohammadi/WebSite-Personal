@@ -8,5 +8,11 @@ namespace Services.Abstractions
 {
     public interface IServiceManager
     {
+        IActivityService ActivityService { get; }
+        IArticleService ArticleService { get; }
+        IBiographyService BiographyService { get; }
+        ICVService CVService { get; }
+        IShortArticleService ShortArticleService { get; }
+
     }
 }
