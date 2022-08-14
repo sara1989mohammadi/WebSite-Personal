@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Persistence.Repositories      
+namespace Persistence.Repositories
 {
-    public class UnitOfWork : IUnitOfWork
+    internal sealed class UnitOfWork : IUnitOfWork
     {
-        public Task<int> SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
+        private readonly DataContext _dbContext;
+        public UnitOfWork(DataContext dbContext) => _dbContext = dbContext;
+        public int SaveChanges() =>
+            _dbContext.SaveChanges();        
     }
 }

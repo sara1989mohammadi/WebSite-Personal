@@ -9,11 +9,11 @@ namespace Services.Abstractions
 {
     public interface IActivityService
     {
-        Task<IEnumerable<ActivityDto>> GetAll();
-        ActivityDto GetById(int id);
-        ActivityDto Insert(ActivityDto item);
-        void Update(int id);
-        ActivityDto FindById(int id);
+        IEnumerable<ActivityDto> GetAll();
+        ActivityDto GetById(int id);       
+        void Insert(ActivityDto entity);        
+        void Update(ActivityDto entity);              
         void Delete(int id);
+        
     }
 }

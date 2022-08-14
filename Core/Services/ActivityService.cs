@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Domain.Entities;
 using Domain.Repositories;
 using Mapster;
 using Services.Abstractions;
@@ -17,38 +18,41 @@ namespace Services
         {
             _repositoryManager = repositoryManager;
         }
+
         public void Delete(int id)
         {
-            throw new NotImplementedException();
-        }
+            _repositoryManager.repositoryActivity.Delete(id);
+        }       
 
-        public ActivityDto FindById(int id)
+        public IEnumerable<ActivityDto> GetAll()
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<ActivityDto>> GetAll()
-        {
-            var activities = await _repositoryManager.repositoryActivity.GetAll();
-            var activitiesDto = activities.Adapt<IEnumerable<ActivityDto>>();
-            return activitiesDto;
+            var activity = _repositoryManager.repositoryActivity.GetAll();
+            var activityDto = activity.Adapt<IEnumerable<ActivityDto>>();
+            return activityDto;
         }
 
         public ActivityDto GetById(int id)
         {
-            var activity =  _repositoryManager.repositoryActivity.GetById(id);
-            var activityDto = activity.Adapt<ActivityDto>();
-            return activityDto;
+            if (id == 0)
+                return null;
+
+            var activity= _repositoryManager.repositoryActivity.GetById(id);
+           return activity.Adapt<ActivityDto>();
         }
 
-        public ActivityDto Insert(ActivityDto item)
+        public void Insert(ActivityDto entity)
         {
-            throw new NotImplementedException();
+            var activity = entity.Adapt<Activity>();
+            _repositoryManager.repositoryActivity.Insert(activity);
+            _repositoryManager.UnitOfWork.SaveChanges();
+           
         }
 
-        public void Update(int id)
+        public void Update(ActivityDto entity)
         {
-            throw new NotImplementedException();
+            var activity = entity.Adapt<Activity>();
+            _repositoryManager.repositoryActivity.Update(activity);
+            _repositoryManager.UnitOfWork.SaveChanges();
         }
     }
 }

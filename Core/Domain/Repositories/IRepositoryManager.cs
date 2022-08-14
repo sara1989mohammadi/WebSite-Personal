@@ -14,5 +14,6 @@ namespace Domain.Repositories
         IRepositoryBook repositoryBook { get; }
         IRepositoryCV repositoryCV { get; }
         IRepositoryShortArticle repositoryShortArticle { get; }
+        IUnitOfWork UnitOfWork { get; }
     }
 }
