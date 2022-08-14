@@ -1,4 +1,5 @@
-﻿using Domain.Repositories;
+﻿using Domain.Entities;
+using Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,42 +9,62 @@ using System.Threading.Tasks;
 
 namespace Persistence.Repositories
 {
-    public class RepositoryBase<T1> : IRepositoryBase<T1> where T1 : class
+    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : BaseEntity
     {
         private readonly DataContext _context;
         public RepositoryBase(DataContext context)
         {
             _context = context;
         }
-        public virtual void Delete(int id)
+
+        public void Delete(TEntity entity)
         {
-            _context.Set<T1>().Remove(FindById(id));          
+            _context.Set<TEntity>().Remove(entity);
         }
 
-        public T1 FindById(int id)
+        public void Delete(IEnumerable<TEntity> entities)
         {
-            return _context.Set<T1>().Find(id);
+            _context.Set<TEntity>().RemoveRange(entities);
+        }
+        public void Delete(int id)
+        {
+            _context.Set<TEntity>().Remove(FindById(id));
+        }
+        public virtual TEntity FindById(int id)
+        {
+            return _context.Set<TEntity>().Find(id);
+        }
+        public IEnumerable<TEntity> GetAll()
+        {
+            return _context.Set<TEntity>().ToList();
         }
 
-        public async Task<IEnumerable<T1>> GetAll()
+        public TEntity GetById(int id)
         {
-            return await _context.Set<T1>().ToListAsync();
+            return _context.Set<TEntity>().FirstOrDefault(e => e.Id == Convert.ToInt32(id));
+        }        
+
+        public void Insert(TEntity entity)
+        {
+            if (entity != null)
+            {
+                _context.Set<TEntity>().Add(entity);
+            }
         }
 
-        public T1 GetById(int id)
+        public void Insert(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
-            //  return _context.Set<T1>().FindById(id);           
+            _context.Set<TEntity>().AddRange(entities);
         }
 
-        public virtual T1 Insert(T1 item)
+        public void Update(TEntity entity)
         {
-            return _context.Set<T1>().Add(item).Entity;
+            _context.Set<TEntity>().Update(entity);
         }
 
-        public void Update(int id)
+        public void Update(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            _context.Set<TEntity>().UpdateRange(entities);
         }
     }
 }
