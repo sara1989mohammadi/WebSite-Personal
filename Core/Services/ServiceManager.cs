@@ -13,6 +13,7 @@ namespace Services
         private readonly Lazy<IActivityService> _lazyctivityService;
         private readonly Lazy<IArticleService> _lazyArticleService;
         private readonly Lazy<IBiographyService> _lazyBiographyService;
+        private readonly Lazy<IBookService> _lazyBookService;
         private readonly Lazy<ICVService> _lazyCVService;
         private readonly Lazy<IShortArticleService> _lazyShortArticleService;
 
@@ -22,6 +23,7 @@ namespace Services
             _lazyArticleService = new Lazy<IArticleService>(() => new ArticleService(repositoryManager));
             _lazyBiographyService = new Lazy<IBiographyService>(() => new BiographyService(repositoryManager));
             _lazyCVService = new Lazy<ICVService>(() => new CVService(repositoryManager));
+            _lazyBookService = new Lazy<IBookService>(() => new BookService(repositoryManager));
             _lazyShortArticleService = new Lazy<IShortArticleService>(() => new ShortArticleService(repositoryManager));
         }
 
@@ -32,6 +34,7 @@ namespace Services
         public IBiographyService BiographyService => _lazyBiographyService.Value;
 
         public ICVService CVService => _lazyCVService.Value;
+        public IBookService BookService => _lazyBookService.Value;
 
         public IShortArticleService ShortArticleService => _lazyShortArticleService.Value;
     }

@@ -21,6 +21,7 @@ namespace Services
         public void Delete(int id)
         {
             _repositoryManager.repositoryArticle.Delete(id);
+            _repositoryManager.UnitOfWork.SaveChanges();
         }
 
         public IEnumerable<ArticleDto> GetAll()

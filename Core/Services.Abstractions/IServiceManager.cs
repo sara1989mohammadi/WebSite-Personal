@@ -11,6 +11,7 @@ namespace Services.Abstractions
         IActivityService ActivityService { get; }
         IArticleService ArticleService { get; }
         IBiographyService BiographyService { get; }
+        IBookService BookService { get; }
         ICVService CVService { get; }
         IShortArticleService ShortArticleService { get; }
 
