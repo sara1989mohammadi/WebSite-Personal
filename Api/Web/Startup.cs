@@ -40,10 +40,10 @@ namespace Web
             });
             services.AddScoped<IServiceManager, ServiceManager>();
             services.AddScoped<IRepositoryManager, RepositoryManager>();
-            services.AddDbContextPool<DataContext>(builder =>
+            services.AddDbContextPool<DataContext>(opts =>
             {
-                services.AddDbContext<DataContext>(opt =>
-               opt.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+
+            opts.UseSqlServer(Configuration.GetConnectionString("ConnectionString"));
 
             });
         }
