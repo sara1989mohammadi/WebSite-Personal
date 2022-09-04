@@ -11,6 +11,7 @@ namespace Web.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
     public class ActivityController : ControllerBase
     {
         private readonly IServiceManager _serviceManager;
@@ -19,10 +20,12 @@ namespace Web.Controllers
             _serviceManager = serviceManager;
         }
         [HttpGet]
-        public IActionResult Get()
+        [ProducesResponseType(200)]
+        public ActionResult<IEnumerable<ActivityDto>> Get()
         {
             var list = _serviceManager.ActivityService.GetAll();
-            return Ok(list);
+           return Ok( list);
+           
 
         }
         [HttpGet("{id}")]

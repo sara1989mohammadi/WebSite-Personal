@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstractions;
-
+using System.Collections.Generic;
 
 namespace Web.Controllers
 {
@@ -16,10 +16,11 @@ namespace Web.Controllers
             _serviceManager = serviceManager;
         }
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult<IEnumerable<ArticleDto>> Get()
         {
             var list = _serviceManager.ArticleService.GetAll();
             return Ok(list);
+
 
         }
         [HttpGet("{id}")]

@@ -8,6 +8,7 @@ namespace Domain.Entities
 {
    public class Biography: BaseEntity
     {
+        public string ShortDescription { get; set; }
         public string Description { get; set; }
     }
 }

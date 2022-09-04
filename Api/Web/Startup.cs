@@ -34,6 +34,12 @@ namespace Web
         {
 
             services.AddControllers();
+            services.AddCors(o=> {
+                o.AddPolicy("AllowAll", builder =>
+                 builder.AllowAnyOrigin()
+                 .AllowAnyMethod()
+                 .AllowAnyHeader());
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Web", Version = "v1" });
@@ -45,8 +51,7 @@ namespace Web
 
             opts.UseSqlServer(Configuration.GetConnectionString("ConnectionString"));
 
-            });
-
+            });         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,7 +65,7 @@ namespace Web
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("AllowAll");
             app.UseRouting();
 
             app.UseAuthorization();
@@ -68,8 +73,9 @@ namespace Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });
-           
+            });          
+
+            
         }
     }
 }
